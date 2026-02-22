@@ -111,7 +111,11 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Qwen3-VL Gradio Web UI")
     parser.add_argument("--model-dir", default=".", help="模型目录（含 config.json/index/shards）")
     parser.add_argument("--device", default="auto", help="推理设备，例如 auto/cuda:1/cpu")
-    parser.add_argument("--host", default="0.0.0.0", help="Gradio 监听地址")
+    parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        help="Gradio 监听地址（默认仅本机回环，避免意外暴露到公网）",
+    )
     parser.add_argument("--port", type=int, default=7860, help="Gradio 监听端口")
     parser.add_argument("--share", action="store_true", help="启用 Gradio share 链接")
     return parser.parse_args()
