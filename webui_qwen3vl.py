@@ -108,7 +108,7 @@ class Qwen3VLRunner:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Qwen3-VL Gradio Web UI")
+    parser = argparse.ArgumentParser(description="博视医疗Robotrak EyeGPT")
     parser.add_argument("--model-dir", default=".", help="模型目录（含 config.json/index/shards）")
     parser.add_argument("--device", default="auto", help="推理设备，例如 auto/cuda:1/cpu")
     parser.add_argument(
@@ -122,11 +122,10 @@ def parse_args() -> argparse.Namespace:
 
 
 def build_ui(runner: Qwen3VLRunner) -> gr.Blocks:
-    with gr.Blocks(title="Qwen3-VL Local WebUI") as demo:
-        gr.Markdown("# Qwen3-VL 本地推理 WebUI")
+    with gr.Blocks(title="博视医疗Robotrak EyeGPT") as demo:
+        gr.Markdown("# 博视医疗Robotrak EyeGPT")
         gr.Markdown(
             "上传图片并输入提示词，点击 **生成** 后查看模型回复。"
-            "模型只会在服务启动时加载一次。"
         )
 
         with gr.Row():
