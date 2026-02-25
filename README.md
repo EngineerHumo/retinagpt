@@ -46,6 +46,24 @@ http://127.0.0.1:7860
 
 > 安全说明：如果你显式设置 `--host 0.0.0.0`，服务会监听所有网卡地址；当服务器安全组/防火墙放通端口时，该 UI 可能被公网直接访问。除非你明确需要局域网/公网访问，否则建议保持默认 `127.0.0.1` 并配合 SSH 端口转发使用。
 
+## 3.1 低显存（约 6GB）Web UI 推理
+
+如果你只有约 6GB 显存，建议使用新增脚本 `webui_qwen3vl_lowvram.py` 并启用 4bit 量化：
+
+```bash
+pip install bitsandbytes accelerate
+python webui_qwen3vl_lowvram.py \
+  --model-dir . \
+  --precision int4 \
+  --cpu-offload \
+  --port 7860
+```
+
+说明：
+- `--precision auto` 在 CUDA 环境会默认走 `int4`。
+- `--cpu-offload` 会减少显存占用，但速度会明显下降。
+- 6GB 显存属于极限场景，分辨率过高或 `max_new_tokens` 过大仍可能 OOM。
+
 ## 4. 常用参数
 
 - `--device auto|cuda:0|cpu`
